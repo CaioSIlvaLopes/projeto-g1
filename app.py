@@ -22,7 +22,9 @@ def carregar() -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------- Cabeçalho
-st.markdowm("Professor: Alexandre Neves Louzada / Aluno: Caio Silva Lopes")
+st.markdowm(
+    "Professor: Alexandre Neves Louzada / Aluno: Caio Silva Lopes"
+)
 st.title("📉 Desemprego no Brasil: onde, quando e quão grave?")
 st.markdown(
     "**Problema:** o desemprego não é distribuído de forma uniforme — varia entre regiões, estados e momentos "
