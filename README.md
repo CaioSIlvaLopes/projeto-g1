@@ -1,5 +1,7 @@
 # 📉 Desemprego no Brasil (2015–2024) — Análise e Dashboard
 
+Nome: Caio Silva Lopes
+
 Projeto G1 · Linguagem de Programação — Análise e Visualização de Dados com Python
 
 | Entrega | Link |
