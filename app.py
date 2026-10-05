@@ -132,6 +132,7 @@ with tabs[1]:
     ax.set_xlabel("")
     ax.set_ylabel("")
     st.pyplot(fig2)
+    plt.close(fig2)
     anos_taxa = df.groupby("ano").apply(taxa_ponderada, include_groups=False)
     st.info(
         f"**Interpretação:** o pico anual do período filtrado foi **{anos_taxa.idxmax()}** ({anos_taxa.max():.2f}%) "
@@ -149,6 +150,7 @@ with tabs[2]:
         ax.set_xlabel("")
         ax.set_ylabel("Taxa (%)")
         st.pyplot(fig)
+        plt.close(fig)
     with c2:
         st.subheader("Fase econômica × região")
         fase = df.groupby(["fase", "regiao"]).apply(taxa_ponderada, include_groups=False).rename("taxa").reset_index()
@@ -206,6 +208,7 @@ with tabs[4]:
         fig, ax = plt.subplots(figsize=(6, 4.5))
         sns.heatmap(df[COLS_NUM].corr(method=metodo), annot=True, fmt=".2f", cmap="coolwarm", center=0, vmin=-1, vmax=1, ax=ax)
         st.pyplot(fig)
+        plt.close(fig)
     with c2:
         x = st.selectbox("Variável explicativa", [c for c in COLS_NUM if c != "taxa_desemprego"], index=3)
         r, p = (stats.pearsonr if metodo == "pearson" else stats.spearmanr)(df[x], df["taxa_desemprego"])
@@ -233,16 +236,30 @@ with tabs[5]:
     st.dataframe(df.drop(columns=["lat", "lon"]), width="stretch", hide_index=True)
     st.download_button("⬇️ Baixar CSV filtrado", df.to_csv(index=False).encode("utf-8"), "desemprego_filtrado.csv", "text/csv")
 
-# ---------------------------------------------------------------- Conclusão
+# ---------------------------------------------------------------- Conclusão (dinâmica)
+reg_c = df.groupby("regiao").apply(taxa_ponderada, include_groups=False).sort_values()
+gap_setor = df.groupby("setor_predominante")["taxa_desemprego"].mean()
+corr_fortes = df[COLS_NUM].corr()["taxa_desemprego"].drop("taxa_desemprego").abs()
+ORDEM_FASE = ["Pré-pandemia (2015-19)", "Pandemia (2020-21)", "Pós-pandemia (2022-24)"]
+fase_t = df.groupby("fase").apply(taxa_ponderada, include_groups=False)
+fase_t = fase_t.reindex([f for f in ORDEM_FASE if f in fase_t.index])
+texto_fase = " → ".join(f"{f.split(' (')[0]}: {v:.1f}%" for f, v in fase_t.items())
+
 st.divider()
 st.header("📌 Conclusão executiva")
 st.markdown(
     f"""
-- **Território importa mais que setor.** Na seleção atual, a diferença entre a UF mais e a menos afetada é de
-  **{por_uf.iloc[-1] - por_uf.iloc[0]:.1f} p.p.**; o setor predominante praticamente não diferencia a taxa.
-- **A pandemia foi um choque generalizado.** Em toda a base, 2020–2021 concentram os níveis Críticos, com recuperação em 2022.
-- **Renda, vagas formais e inflação não explicam o desemprego** nesta base (correlações próximas de zero) — indicando que
-  políticas devem priorizar **focalização regional** (Nordeste e Norte) e **resposta rápida a choques**.
+Com base nos filtros atualmente selecionados:
+
+- **Território:** **{reg_c.index[-1]}** tem a maior taxa regional ({reg_c.iloc[-1]:.1f}%) e **{reg_c.index[0]}** a menor
+  ({reg_c.iloc[0]:.1f}%). Entre UFs, **{por_uf.index[-1]}** ({por_uf.iloc[-1]:.1f}%) vs. **{por_uf.index[0]}** ({por_uf.iloc[0]:.1f}%):
+  **{por_uf.iloc[-1] - por_uf.iloc[0]:.1f} p.p.** de diferença. Entre setores, a variação das médias é de apenas
+  **{gap_setor.max() - gap_setor.min():.1f} p.p.**
+- **Evolução:** taxa por fase econômica — {texto_fase}. O último trimestre filtrado fechou em **{taxa_ult:.2f}%**
+  ({delta:+.2f} p.p. vs. o primeiro).
+- **Risco:** **{pct_critico:.1f}%** das observações selecionadas estão em nível Crítico.
+- **Fatores explicativos:** a maior correlação absoluta com a taxa é **{corr_fortes.idxmax()}** (|r| = {corr_fortes.max():.2f}) — 
+  {"relação fraca, pouco explicativa" if corr_fortes.max() < .3 else "relação relevante que merece investigação"}. Correlação não implica causalidade.
 - **Limitação:** dados simulados; recomenda-se repetir a análise com a PNAD Contínua/IBGE para decisões reais.
 """
 )
