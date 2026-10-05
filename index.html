@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desemprego no Brasil (2015–2024) — Projeto G1</title>
+  <style>
+    :root {
+      --bg: #fafaf7;
+      --fg: #1d2330;
+      --mut: #5b6475;
+      --card: #fff;
+      --bd: #e4e2da;
+      --ac: #c8452b;
+      --ac2: #1f4e79
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root {
+        --bg: #14171e;
+        --fg: #e8e9ee;
+        --mut: #9aa1b2;
+        --card: #1d212b;
+        --bd: #2d3342;
+        --ac: #ff7a5c;
+        --ac2: #7fb2e5
+      }
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif
+    }
+
+    .w {
+      max-width: 1040px;
+      margin: auto;
+      padding: 0 20px
+    }
+
+    header {
+      padding: 64px 0 36px;
+      border-bottom: 1px solid var(--bd)
+    }
+
+    .tag {
+      color: var(--ac);
+      font-weight: 600;
+      letter-spacing: .08em;
+      font-size: 13px;
+      text-transform: uppercase
+    }
+
+    h1 {
+      font-size: clamp(30px, 5vw, 48px);
+      line-height: 1.15;
+      margin: 8px 0 14px
+    }
+
+    h2 {
+      font-size: 26px;
+      margin: 0 0 14px
+    }
+
+    h3 {
+      margin: 0 0 6px;
+      font-size: 17px
+    }
+
+    .lead {
+      color: var(--mut);
+      font-size: 18px;
+      max-width: 720px
+    }
+
+    section {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--bd)
+    }
+
+    .btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 22px
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: var(--ac);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600
+    }
+
+    .btn.o {
+      background: none;
+      border: 1px solid var(--bd);
+      color: var(--fg)
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr))
+    }
+
+    .c {
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: 12px;
+      padding: 18px
+    }
+
+    .k {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--ac);
+      line-height: 1.1
+    }
+
+    .k small {
+      display: block;
+      font-size: 13px;
+      color: var(--mut);
+      font-weight: 400;
+      margin-top: 6px
+    }
+
+    .pill {
+      display: inline-block;
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: 99px;
+      padding: 4px 12px;
+      margin: 3px;
+      font-size: 14px
+    }
+
+    figure {
+      margin: 0 0 26px
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--bd);
+      background: #fff
+    }
+
+    figcaption {
+      color: var(--mut);
+      font-size: 14px;
+      margin-top: 8px
+    }
+
+    ul {
+      padding-left: 20px
+    }
+
+    li {
+      margin: 6px 0
+    }
+
+    footer {
+      padding: 30px 0 50px;
+      color: var(--mut);
+      font-size: 14px
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="w">
+      <div class="tag">Avaliação G1 · Análise e Visualização de Dados com Python</div>
+      <h1>Desemprego no Brasil: onde, quando e quão grave?</h1>
+      <p class="lead">Análise de 800 observações trimestrais de 20 UFs (2015–2024) para identificar territórios
+        vulneráveis, medir o impacto da pandemia e testar o que realmente explica o desemprego.</p>
+      <div class="btns">
+        <a class="btn" href="https://SEU-APP.streamlit.app">📊 Abrir dashboard</a>
+        <a class="btn o" href="https://github.com/SEU-USUARIO/projeto-g1">💻 Código no GitHub</a>
+        <a class="btn o"
+          href="https://github.com/SEU-USUARIO/projeto-g1/blob/main/notebooks/analise_desemprego.ipynb">📓 Notebook</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="w">
+      <h2>Números-chave</h2>
+      <div class="grid">
+        <div class="c">
+          <div class="k">9,86%<small>taxa de desemprego ponderada (2015–24)</small></div>
+        </div>
+        <div class="c">
+          <div class="k">13,2%<small>Nordeste — maior taxa regional</small></div>
+        </div>
+        <div class="c">
+          <div class="k">6,8%<small>Sul — menor taxa regional</small></div>
+        </div>
+        <div class="c">
+          <div class="k">11,3%<small>taxa durante a pandemia (2020–21)</small></div>
+        </div>
+        <div class="c">
+          <div class="k">22,5%<small>das observações em nível Crítico na pandemia (vs. 11,2% antes)</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="w">
+      <h2>O problema e a base de dados</h2>
+      <p>O desemprego não se distribui de forma uniforme. A base <code>simulacao_desemprego_brasil.csv</code> (800
+        linhas × 14 colunas, sem nulos ou duplicatas) reúne população ativa, empregados, desempregados, renda média,
+        vagas formais, inflação, setor predominante e nível de risco por UF e trimestre. Por ter populações diferentes
+        em cada linha, os agregados usam <strong>taxa ponderada</strong> (Σ desempregados ÷ Σ população ativa) em vez de
+        média simples.</p>
+      <p><em>Base simulada para fins didáticos.</em></p>
+    </div>
+  </section>
+
+  <section>
+    <div class="w">
+      <h2>Tecnologias e funcionalidades</h2>
+      <div>
+        <span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Matplotlib</span><span
+          class="pill">Seaborn</span><span class="pill">Streamlit</span><span class="pill">GitHub</span><span
+          class="pill">Plotly</span><span class="pill">SQLAlchemy + SQLite</span><span class="pill">SciPy</span>
+      </div>
+      <div class="grid" style="margin-top:16px">
+        <div class="c">
+          <h3>Dashboard</h3>Filtros múltiplos, KPIs dinâmicos, abas, gráficos interativos, upload de CSV e interpretação
+          automática.
+        </div>
+        <div class="c">
+          <h3>Banco relacional</h3>3 tabelas (regiões, UFs, observações) em SQLite, integradas por JOIN com SQLAlchemy.
+        </div>
+        <div class="c">
+          <h3>Mapa interativo</h3>Bolhas por UF com cor = taxa e tamanho = população ativa, por ano.
+        </div>
+        <div class="c">
+          <h3>Estatística</h3>Séries com média móvel, variação anual e correlação Pearson/Spearman com p-valor.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="w">
+      <h2>Resultados</h2>
+      <figure><img src="imagens/02_serie_temporal.png" alt="Série temporal da taxa de desemprego por região"
+          loading="lazy">
+        <figcaption><strong>Evolução temporal.</strong> Todas as regiões sobem em 2020–2021 e recuam em 2022; o Nordeste
+          permanece acima das demais durante todo o período.</figcaption>
+      </figure>
+      <figure><img src="imagens/03_regioes.png" alt="Comparativo entre regiões e fases" loading="lazy">
+        <figcaption><strong>Regiões e fases.</strong> O Nordeste vai de 13,0% pré-pandemia para 14,6% na pandemia; o Sul
+          permanece abaixo de 8% mesmo no pior momento.</figcaption>
+      </figure>
+      <figure><img src="imagens/04_ranking_heatmap.png" alt="Ranking de UFs e mapa de calor" loading="lazy">
+        <figcaption><strong>Ranking de UFs.</strong> CE (13,7%), PB e BA lideram; PR (6,7%), SC e RS têm as menores
+          taxas — um gap de cerca de 7 p.p.</figcaption>
+      </figure>
+      <figure><img src="imagens/05_risco_setor.png" alt="Níveis de risco por ano e setor" loading="lazy">
+        <figcaption><strong>Risco e setor.</strong> Os níveis Crítico e Alto se concentram em 2020–2021; o setor
+          predominante praticamente não altera a taxa média (9,8% a 10,1%).</figcaption>
+      </figure>
+      <figure><img src="imagens/06_correlacao.png" alt="Matriz de correlação" loading="lazy" style="max-width:520px">
+        <figcaption><strong>Correlação.</strong> Renda, vagas formais, inflação e população ativa têm |r| &lt; 0,03 com
+          a taxa (p &gt; 0,49): nenhuma relação estatisticamente significativa nesta base.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="w">
+      <h2>Conclusão executiva</h2>
+      <ul>
+        <li><strong>Território pesa mais que setor:</strong> a diferença entre regiões chega a 6,3 p.p. (Nordeste vs.
+          Sul).</li>
+        <li><strong>A pandemia foi um choque generalizado</strong> e dobrou a proporção de observações em nível Crítico,
+          com recuperação em 2022.</li>
+        <li><strong>Renda, vagas e inflação não explicam o desemprego</strong> nesta base — correlação não é
+          causalidade, e relações reais exigiriam dados oficiais.</li>
+        <li><strong>Recomendação:</strong> focalizar políticas de emprego no Nordeste e Norte e manter respostas rápidas
+          a choques.</li>
+        <li><strong>Limitações:</strong> dados simulados, 20 das 27 UFs e mapa por centroides. Próximo passo: replicar
+          com a PNAD Contínua (API SIDRA/IBGE).</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="w">Projeto G1 · Linguagem de Programação — Análise e Visualização de Dados com Python · Autor:
+      <strong>SEU NOME</strong></div>
+  </footer>
+</body>
+
+</html>
