@@ -24,7 +24,7 @@ def carregar() -> pd.DataFrame:
 # ---------------------------------------------------------------- Cabeçalho
 st.title("📉 Desemprego no Brasil: onde, quando e quão grave?")
 st.markdown(
-    "Professor: Alexandre Neves Louzada / Aluno: Caio Silva Lopes "
+    "Professor: Alexandre Neves Louzada / Aluno: Caio Silva Lopes\n "
     "**Problema:** o desemprego não é distribuído de forma uniforme — varia entre regiões, estados e momentos "
     "econômicos. Este painel analisa **800 observações trimestrais de 20 UFs (2015–2024)** para identificar "
     "quais territórios estão mais vulneráveis, como a pandemia afetou o mercado de trabalho e se renda, vagas "
