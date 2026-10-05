@@ -6,7 +6,7 @@ Projeto G1 · Linguagem de Programação — Análise e Visualização de Dados 
 |---|---|
 | Repositório GitHub | `https://github.com/CaioSIlvaLopes/projeto-g1` |
 | Página do projeto (GitHub Pages) | `https://caiosilvalopes.github.io/projeto-g1/` |
-| Dashboard (Streamlit Cloud) | `https://desemprego-brasil-caio.streamlit.app` |
+| Dashboard (Streamlit Cloud) | `https://projeto-g1-desemprego-brasil-caio.streamlit.app/` |
 
 ## Problema
 Onde, quando e quão grave é o desemprego? A base simulada traz 800 observações trimestrais de 20 UFs (2015–2024). O projeto identifica territórios vulneráveis, mede o efeito da pandemia e testa se renda, vagas formais e inflação explicam a taxa.
